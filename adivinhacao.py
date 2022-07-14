@@ -1,5 +1,5 @@
 import random
-#O código acima é um jogo de 3 níveis com o objetivo de acertar o número secreto aleatório.
+
 print("---------------------------------")
 print("Bem vindo ao jogo de adivinhação!")
 print("---------------------------------")
