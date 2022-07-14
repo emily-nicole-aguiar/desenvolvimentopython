@@ -1,3 +1,4 @@
+#O código a seguir é um jogo de 3 níveis com o objetivo de acertar o número secreto aleatório. Ao final, a pontuação do jogador é mostrada.
 import random
 
 print("---------------------------------")
