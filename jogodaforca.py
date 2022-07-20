@@ -1,30 +1,63 @@
+import random
+
 def jogar():
 
     print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_")
     print("             JOGO DA FORCA              ")
     print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_")
 
-    palavra_secreta ="caramelo"
-    letras_acertadas = ["_", "_", "_", "_", "_", "_", "_", "_"]
+    arquivo = open("frutas.txt", "r")
+    palavras = []
+
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
+
+    arquivo.close()
+    numero = random.randrange(0, len(palavras))
+    palavra_secreta = palavras[numero].upper()
+    letras_acertadas = ["_" for letra in palavra_secreta]
+
+
     enforcou = False
     acertou = False
+    erros = 0
+
     print(letras_acertadas)
-    while (not acertou and not enforcou):
+
+    while (not enforcou and not acertou):
+
         palpite = input("Digite um letra: ")
-        palpite = palpite.strip()
+        palpite = palpite.strip().upper()
         print("Jogando...")
 
-        index = 0
+        if (palpite in palavra_secreta):
+            index = 0
 
-        for letra in palavra_secreta:
+            for letra in palavra_secreta:
 
-            if (palpite.upper() == letra.upper()):
-                print("Encontrei a letra {} na posição {}".format(letra, index))
-                letras_faltando = str(letras_acertadas.count("_"))
-                print("Ainda faltam {} letras".format(letras_faltando))
-                letras_acertadas[index] = letra
-            index = index + 1
+                if (palpite == letra):
+                    letras_acertadas[index] = letra
+
+                index += 1
+
+        else:
+            erros += 1
+            print("Você errou! faltam {} tentativas".format(6-erros))
+
+        enforcou = erros == 6
+        acertou = "_" not in letras_acertadas
         print(letras_acertadas)
+
+
+
+
+    if (acertou):
+        print("Você ganhou!")
+    else:
+        print("Você perdeu!")
+
+
 
     print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_")
     print("              FIM DO JOGO               ")
